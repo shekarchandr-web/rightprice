@@ -200,18 +200,24 @@ export default function Home() {
                 onChange={(e) => setPhone(e.target.value)}
               />
 
-              <input
-                type="file"
-                className="mb-3"
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  setPreview(URL.createObjectURL(e.target.files[0]));
-                }}
-              />
+              <label className="block border-2 border-dashed p-6 rounded text-center cursor-pointer bg-gray-50 hover:bg-gray-100">
+  📷 Upload Property Photo
+  <input
+    type="file"
+    className="hidden"
+    onChange={(e) => {
+      setImage(e.target.files[0]);
+      setPreview(URL.createObjectURL(e.target.files[0]));
+    }}
+  />
+</label>
 
               {preview && (
-                <img src={preview} className="mb-3 rounded" />
-              )}
+  <img
+    src={preview}
+    className="mb-3 rounded h-40 w-full object-cover"
+  />
+)}
 
               <button
                 onClick={saveListing}
