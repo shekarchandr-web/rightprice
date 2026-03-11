@@ -10,8 +10,12 @@ export default function Home() {
   const [size, setSize] = useState("");
   const [age, setAge] = useState("");
   const [price, setPrice] = useState("");
+  const [demand, setDemand] = useState("");
+  const [queue, setQueue] = useState("");
+
   const [showForm, setShowForm] = useState(false);
   const [phone, setPhone] = useState("");
+
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState("");
 
@@ -34,16 +38,24 @@ export default function Home() {
     let baseRate = 8000;
     let basePrice = baseRate * sqft;
 
-    let discount = buildingAge > 15 ? 0.12 :
-                   buildingAge > 10 ? 0.08 :
-                   buildingAge > 5 ? 0.05 : 0;
+    let discount =
+      buildingAge > 20 ? 0.15 :
+      buildingAge > 15 ? 0.12 :
+      buildingAge > 10 ? 0.08 :
+      buildingAge > 5 ? 0.05 : 0;
 
     let adjusted = basePrice * (1 - discount);
 
-    let min = Math.round(adjusted * 0.93);
-    let max = Math.round(adjusted * 1.07);
+    let min = Math.round(adjusted * 0.92);
+    let max = Math.round(adjusted * 1.08);
 
     setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
+
+    let buyers = Math.floor(Math.random() * 25) + 5;
+    setDemand("🔥 " + buyers + " buyers searching in " + area);
+
+    let rank = Math.floor(Math.random() * 5) + 1;
+    setQueue("⚡ You are seller #" + rank + " waiting for buyers in " + area);
   }
 
   async function uploadImage() {
@@ -90,9 +102,9 @@ export default function Home() {
     ]);
 
     if (error) {
-      alert("Error saving");
+      alert("Error saving listing");
     } else {
-      alert("Property listed!");
+      alert("✅ Property listed successfully");
       setShowForm(false);
     }
   }
@@ -117,7 +129,7 @@ export default function Home() {
       <div className="text-center mt-16">
 
         <h2 className="text-4xl font-bold">
-          Know the Right Price Before You Sell
+          Know the RIGHT PRICE 🚀
         </h2>
 
       </div>
@@ -153,7 +165,7 @@ export default function Home() {
             onClick={estimatePrice}
             className="w-full bg-green-600 text-white p-3 rounded"
           >
-            Check Price
+            Check My Flat Price
           </button>
 
           {price && (
@@ -162,11 +174,15 @@ export default function Home() {
 
               <p className="text-xl text-green-700">{price}</p>
 
+              <p className="text-orange-600 mt-3">{demand}</p>
+
+              <p className="text-blue-600 mt-2">{queue}</p>
+
               <button
                 onClick={() => setShowForm(true)}
                 className="mt-4 bg-black text-white px-4 py-2 rounded"
               >
-                List Property
+                List My Property
               </button>
 
             </div>
@@ -179,7 +195,7 @@ export default function Home() {
 
               <input
                 className="w-full border p-3 mb-3 rounded"
-                placeholder="Phone"
+                placeholder="Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
