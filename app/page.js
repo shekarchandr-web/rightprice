@@ -9,6 +9,7 @@ export default function Home() {
   const [area, setArea] = useState("");
   const [size, setSize] = useState("");
   const [age, setAge] = useState("");
+
   const [price, setPrice] = useState("");
   const [demand, setDemand] = useState("");
   const [queue, setQueue] = useState("");
@@ -51,7 +52,7 @@ export default function Home() {
 
     setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
 
-    let buyers = Math.floor(Math.random() * 25) + 5;
+    let buyers = Math.floor(Math.random() * 20) + 5;
     setDemand("🔥 " + buyers + " buyers searching in " + area);
 
     let rank = Math.floor(Math.random() * 5) + 1;
@@ -114,24 +115,17 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
 
       <div className="bg-white shadow p-4 flex justify-between px-10">
-
-        <h1 className="font-bold text-xl text-green-700">
-          RightPrice
-        </h1>
-
+        <h1 className="font-bold text-xl text-green-700">RightPrice</h1>
         <div className="space-x-6">
           <Link href="/" className="font-semibold text-green-700">Sell</Link>
           <Link href="/buying" className="font-semibold text-gray-600">Buy</Link>
         </div>
-
       </div>
 
       <div className="text-center mt-16">
-
         <h2 className="text-4xl font-bold">
-          Know the RIGHT PRICE 🚀
+          Know the Right Price Before You Sell
         </h2>
-
       </div>
 
       <div className="flex justify-center mt-10">
@@ -200,28 +194,28 @@ export default function Home() {
                 onChange={(e) => setPhone(e.target.value)}
               />
 
-              <label className="block border-2 border-dashed p-6 rounded text-center cursor-pointer bg-gray-50 hover:bg-gray-100">
-  📷 Upload Property Photo
-  <input
-    type="file"
-    className="hidden"
-    onChange={(e) => {
-      setImage(e.target.files[0]);
-      setPreview(URL.createObjectURL(e.target.files[0]));
-    }}
-  />
-</label>
+              <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-6 cursor-pointer hover:bg-gray-50">
+                📷 Click to Upload Property Photo
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                    setPreview(URL.createObjectURL(e.target.files[0]));
+                  }}
+                />
+              </label>
 
               {preview && (
-  <img
-    src={preview}
-    className="mb-3 rounded h-40 w-full object-cover"
-  />
-)}
+                <img
+                  src={preview}
+                  className="mt-3 h-44 w-full object-cover rounded-xl"
+                />
+              )}
 
               <button
                 onClick={saveListing}
-                className="w-full bg-blue-600 text-white p-3 rounded"
+                className="w-full mt-3 bg-blue-600 text-white p-3 rounded"
               >
                 Submit Listing
               </button>
