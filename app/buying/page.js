@@ -46,10 +46,21 @@ export default function Buying() {
 
   async function searchProperties() {
 
-    const { data } = await supabase
+    if (!area) {
+      alert("Select area");
+      return;
+    }
+
+    const { data, error } = await supabase
       .from("Listings")
       .select("*")
-      .eq("area", area);
+      .eq("area", area)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      alert("Error loading properties");
+      return;
+    }
 
     setProperties(data || []);
   }
@@ -58,29 +69,34 @@ export default function Buying() {
 
     <div className="min-h-screen bg-gray-100">
 
-      {/* Navigation */}
+      {/* NAVBAR */}
 
-      <div className="bg-white shadow p-4 flex justify-center space-x-6">
+      <div className="bg-white shadow p-4 flex justify-between px-10">
 
-        <Link href="/" className="font-semibold text-gray-700">
-          Sell Property
-        </Link>
+        <h1 className="font-bold text-xl text-green-700">
+          RightPrice
+        </h1>
 
-        <Link href="/buying" className="font-semibold text-blue-600">
-          Buy Property
-        </Link>
+        <div className="space-x-6">
+          <Link href="/" className="font-semibold text-gray-700">
+            Sell
+          </Link>
+          <Link href="/buying" className="font-semibold text-green-700">
+            Buy
+          </Link>
+        </div>
 
       </div>
 
-      {/* Search Section */}
+      {/* SEARCH */}
 
       <div className="flex flex-col items-center mt-10">
 
         <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
 
-          <h1 className="text-2xl font-bold text-center mb-4">
+          <h2 className="text-xl font-bold text-center mb-4">
             Find Properties
-          </h1>
+          </h2>
 
           <select
             className="w-full border rounded-lg p-3"
@@ -104,14 +120,14 @@ export default function Buying() {
 
         </div>
 
-        {/* Property Results */}
+        {/* PROPERTY LIST */}
 
         <div className="mt-6 w-full max-w-md">
 
           {properties.map((p, index) => {
 
             const rank = index + 1;
-            const buyersToday = Math.floor(Math.random() * 8) + 1;
+            const buyersToday = Math.floor(Math.random() * 10) + 1;
 
             return (
 
@@ -152,16 +168,27 @@ export default function Buying() {
                   🔥 {buyersToday} buyers viewed today
                 </p>
 
-                <button
-                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
-                  onClick={() => alert("Contact Seller: " + p.phone)}
+                {/* CONTACT BUTTONS */}
+
+                <a
+                  href={`https://wa.me/91${p.phone}`}
+                  target="_blank"
+                  className="block mt-4 bg-green-600 text-white px-4 py-2 rounded text-center"
                 >
-                  Contact Seller
-                </button>
+                  💬 WhatsApp Seller
+                </a>
+
+                <a
+                  href={`tel:${p.phone}`}
+                  className="block mt-2 bg-blue-600 text-white px-4 py-2 rounded text-center"
+                >
+                  📞 Call Seller
+                </a>
 
               </div>
 
             );
+
           })}
 
         </div>
@@ -171,4 +198,4 @@ export default function Buying() {
     </div>
 
   );
-}
+}   
