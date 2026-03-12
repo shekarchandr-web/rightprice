@@ -40,6 +40,7 @@ data.sort((a, b) => {
 });
 
 setListings(data);
+  }
   function contact(phone) {
     window.open(`https://wa.me/91${phone}`, "_blank");
   }
