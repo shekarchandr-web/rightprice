@@ -92,15 +92,19 @@ export default function Home() {
 
     const imageUrl = await uploadImage();
 
-    const { error } = await supabase.from("Listings").insert([
-      {
-        area,
-        size: parseInt(size),
-        age: parseInt(age),
-        phone,
-        image_url: imageUrl
-      }
-    ]);
+   const { data, error } = await supabase
+  .from("Listings")
+  .insert([
+    {
+      area,
+      size: parseInt(size),
+      age: parseInt(age),
+      phone,
+      image_url: imageUrl
+    }
+  ])
+  .select()
+  .single();
 
     if (error) {
       alert("Error saving listing");
