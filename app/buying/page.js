@@ -129,6 +129,10 @@ export default function Buying() {
               <p className="text-blue-600 text-sm mt-1">
                 Seller Rank #{rank} in this area
               </p>
+              <p className="text-orange-600 text-sm">
+🔥 {Math.floor(Math.random() * 10) + 1} buyers viewed today
+</p>
+
 
   <button
   onClick={() => alert("Contact Seller: " + item.phone)}
