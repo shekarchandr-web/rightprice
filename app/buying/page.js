@@ -116,7 +116,9 @@ setListings(data);
                   className="h-44 w-full object-cover rounded"
                 />
               )}
-
+{item.is_boosted && (
+  <p className="text-yellow-600 font-bold">⭐ BOOSTED</p>
+)}
               <h3 className="font-semibold mt-2">
                 {item.size} sqft Apartment
               </h3>
