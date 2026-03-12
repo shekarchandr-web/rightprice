@@ -21,21 +21,25 @@ export default function Buying() {
       alert("Select area");
       return;
     }
+const { data, error } = await supabase
+  .from("Listings")
+  .select("*")
+  .eq("area", area)
+  .order("id", { ascending: false });
 
-    const { data, error } = await supabase
-      .from("Listings")
-      .select("*")
-      .eq("area", area)
-      .order("id", { ascending: false });
+if (error) {
+  alert("Error loading");
+  return;
+}
 
-    if (error) {
-      alert("Error loading");
-      return;
-    }
+// ⭐ BOOST SORTING LOGIC — ADD THIS BLOCK
+data.sort((a, b) => {
+  if (a.is_boosted && !b.is_boosted) return -1;
+  if (!a.is_boosted && b.is_boosted) return 1;
+  return 0;
+});
 
-    setListings(data);
-  }
-
+setListings(data);
   function contact(phone) {
     window.open(`https://wa.me/91${phone}`, "_blank");
   }
