@@ -130,11 +130,11 @@ export default function Buying() {
                 Seller Rank #{rank} in this area
               </p>
 
-             <button
-  onClick={() => window.open(`https://wa.me/91${item.phone}`, "_blank")}
-  className="mt-3 bg-green-600 text-white px-4 py-2 rounded"
+  <button
+  onClick={() => alert("Contact Seller: " + item.phone)}
+  className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
 >
-  WhatsApp Seller
+  Contact Seller
 </button>
 
               <button
