@@ -111,7 +111,7 @@ export default function Home() {
     } else {
       alert("✅ Property listed successfully");
    const options = {
-  key:"rzp_live_SRVAJjNKLzLbx0",
+  key:"rzp_live_SRVAJjNKLzLbx0" ,
   amount: 9900,
   currency: "INR",
   name: "RightPrice",
