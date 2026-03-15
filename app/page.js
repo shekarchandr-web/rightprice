@@ -110,14 +110,28 @@ export default function Home() {
       alert("Error saving listing");
     } else {
       alert("✅ Property listed successfully");
-      const confirmBoost = confirm("Do you want to BOOST this property for ₹99?");
-if (confirmBoost) {
-  await supabase
-    .from("Listings")
-    .update({ is_boosted: true })
-    .eq("phone", phone);
+   const options = {
+  key:"rzp_live_SRVAJjNKLzLbx0"
+  amount: 9900,
+  currency: "INR",
+  name: "RightPrice",
+  description: "Boost Property Listing",
+  handler: async function () {
 
-  alert("⭐ Property Boosted!");
+    await supabase
+      .from("Listings")
+      .update({ is_boosted: true })
+      .eq("id", data.id);
+
+    alert("⭐ Payment successful. Property Boosted!");
+  },
+  theme: {
+    color: "#16a34a"
+  }
+};
+
+const rzp = new window.Razorpay(options);
+rzp.open();
 }
       setShowForm(false);
     }
