@@ -82,7 +82,15 @@ export default function Home() {
 
     return data.publicUrl;
   }
-
+async function loadRazorpay() {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
   async function saveListing() {
 
     if (!phone) {
@@ -129,6 +137,13 @@ export default function Home() {
     color: "#16a34a"
   }
 };
+
+const res = await loadRazorpay();
+
+if (!res) {
+  alert("Payment SDK failed to load");
+  return;
+}
 
 const rzp = new window.Razorpay(options);
 rzp.open();
