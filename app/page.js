@@ -84,7 +84,8 @@ export default function Home() {
       currency: "INR",
       name: "RightPrice",
       description: "Boost Listing",
-      handler: async function () {
+
+handler: async function () {
 
   await supabase
     .from("Listings")
