@@ -58,7 +58,38 @@ export default function Home() {
     let rank = Math.floor(Math.random() * 5) + 1;
     setQueue("⚡ You are seller #" + rank + " waiting for buyers in " + area);
   }
+async function loadRazorpay() {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
+async function handleBoost() {
 
+  const res = await loadRazorpay();
+
+  if (!res) {
+    alert("Payment SDK failed");
+    return;
+  }
+
+  const options = {
+    key: "rzp_test_SRWVOPEX9CILSZ",
+    amount: 9900,
+    currency: "INR",
+    name: "RightPrice",
+    description: "Boost Listing",
+    handler: function () {
+      alert("⭐ Payment Successful — Boost activated");
+    }
+  };
+
+  const rzp = new window.Razorpay(options);
+  rzp.open();
+}
   async function uploadImage() {
 
     if (!image) return null;
@@ -118,36 +149,8 @@ async function loadRazorpay() {
       alert("Error saving listing");
     } else {
       alert("✅ Property listed successfully");
-   const options = {
-  key:"rzp_test_SRWVOPEX9CILSZ" ,
-  amount: 9900,
-  currency: "INR",
-  name: "RightPrice",
-  description: "Boost Property Listing",
-  handler: async function () {
-
-    await supabase
-      .from("Listings")
-      .update({ is_boosted: true })
-      .eq("id", data.id);
-
-    alert("⭐ Payment successful. Property Boosted!");
-  },
-  theme: {
-    color: "#16a34a"
-  }
-};
-
-const res = await loadRazorpay();
-
-if (!res) {
-  alert("Payment SDK failed to load");
-  return;
-}
-
-const rzp = new window.Razorpay(options);
-rzp.open();
-}
+   
+  
       setShowForm(false);
     }
   
@@ -220,7 +223,12 @@ rzp.open();
               >
                 List My Property
               </button>
-
+<button
+  onClick={handleBoost}
+  className="mt-3 bg-yellow-500 text-white px-4 py-2 rounded"
+>
+  ⭐ Boost My Listing ₹99
+</button>
             </div>
 
           )}
