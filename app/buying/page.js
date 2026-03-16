@@ -25,7 +25,8 @@ const { data, error } = await supabase
   .from("Listings")
   .select("*")
   .eq("area", area)
-  .order("id", { ascending: false });
+ .order("is_boosted", { ascending: false })
+.order("id", { ascending: false });
 
 if (error) {
   alert("Error loading");
@@ -108,7 +109,13 @@ setListings(data);
 
           return (
 
-            <div key={item.id} className="bg-white shadow rounded-xl p-4 mb-4">
+           <div
+  key={item.id}
+  className={`p-4 mb-4 rounded-xl shadow transition 
+  ${item.is_boosted 
+    ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
+    : "bg-white"}`}
+>
 
               {item.image_url && (
                 <img
@@ -117,7 +124,12 @@ setListings(data);
                 />
               )}
 {item.is_boosted && (
-  <p className="text-yellow-600 font-bold">⭐ BOOSTED</p>
+  <div className="flex justify-between items-center">
+    <p className="text-yellow-600 font-bold">⭐ BOOSTED</p>
+    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+      HIGH DEMAND
+    </span>
+  </div>
 )}
               <h3 className="font-semibold mt-2">
                 {item.size} sqft Apartment
