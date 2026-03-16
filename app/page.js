@@ -71,6 +71,11 @@ export default function Home() {
 
   async function handleBoost() {
 
+    if (!phone) {
+      alert("Enter phone first by listing property");
+      return;
+    }
+
     const res = await loadRazorpay();
 
     if (!res) {
@@ -85,15 +90,14 @@ export default function Home() {
       name: "RightPrice",
       description: "Boost Listing",
 
-handler: async function () {
+      handler: async function () {
 
-  await supabase
-    .from("Listings")
-    .update({ is_boosted: true })
-    .eq("phone", phone);
+        await supabase
+          .from("Listings")
+          .update({ is_boosted: true })
+          .eq("phone", phone);
 
-  alert("⭐ Payment Successful — Property Boosted!");
-}
+        alert("⭐ Payment Successful — Property Boosted!");
       }
     };
 
