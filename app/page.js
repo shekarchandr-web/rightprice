@@ -84,8 +84,15 @@ export default function Home() {
       currency: "INR",
       name: "RightPrice",
       description: "Boost Listing",
-      handler: function () {
-        alert("⭐ Payment Successful — Boost activated");
+      handler: async function () {
+
+  await supabase
+    .from("Listings")
+    .update({ is_boosted: true })
+    .eq("phone", phone);
+
+  alert("⭐ Payment Successful — Property Boosted!");
+}
       }
     };
 
