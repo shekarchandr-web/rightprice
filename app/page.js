@@ -58,38 +58,41 @@ export default function Home() {
     let rank = Math.floor(Math.random() * 5) + 1;
     setQueue("⚡ You are seller #" + rank + " waiting for buyers in " + area);
   }
-async function loadRazorpay() {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-}
-async function handleBoost() {
 
-  const res = await loadRazorpay();
-
-  if (!res) {
-    alert("Payment SDK failed");
-    return;
+  async function loadRazorpay() {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
   }
 
-  const options = {
-    key: "rzp_test_SRWVOPEX9CILSZ",
-    amount: 9900,
-    currency: "INR",
-    name: "RightPrice",
-    description: "Boost Listing",
-    handler: function () {
-      alert("⭐ Payment Successful — Boost activated");
-    }
-  };
+  async function handleBoost() {
 
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-}
+    const res = await loadRazorpay();
+
+    if (!res) {
+      alert("Payment SDK failed");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_SRWVOPEX9CILSZ",
+      amount: 9900,
+      currency: "INR",
+      name: "RightPrice",
+      description: "Boost Listing",
+      handler: function () {
+        alert("⭐ Payment Successful — Boost activated");
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
+
   async function uploadImage() {
 
     if (!image) return null;
@@ -113,15 +116,7 @@ async function handleBoost() {
 
     return data.publicUrl;
   }
-async function loadRazorpay() {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-}
+
   async function saveListing() {
 
     if (!phone) {
@@ -131,29 +126,25 @@ async function loadRazorpay() {
 
     const imageUrl = await uploadImage();
 
-   const { data, error } = await supabase
-  .from("Listings")
-  .insert([
-    {
-      area,
-      size: parseInt(size),
-      age: parseInt(age),
-      phone,
-      image_url: imageUrl
-    }
-  ])
-  .select()
-  .single();
+    const { error } = await supabase
+      .from("Listings")
+      .insert([
+        {
+          area,
+          size: parseInt(size),
+          age: parseInt(age),
+          phone,
+          image_url: imageUrl
+        }
+      ]);
 
     if (error) {
       alert("Error saving listing");
     } else {
       alert("✅ Property listed successfully");
-   
-  
       setShowForm(false);
     }
-  
+  }
 
   return (
 
@@ -177,8 +168,7 @@ async function loadRazorpay() {
 
         <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
 
-          <select
-            className="w-full border p-3 mb-3 rounded"
+          <select className="w-full border p-3 mb-3 rounded"
             value={area}
             onChange={(e) => setArea(e.target.value)}
           >
@@ -186,35 +176,27 @@ async function loadRazorpay() {
             {areas.map(a => <option key={a}>{a}</option>)}
           </select>
 
-          <input
-            className="w-full border p-3 mb-3 rounded"
+          <input className="w-full border p-3 mb-3 rounded"
             placeholder="Flat Size"
             value={size}
             onChange={(e) => setSize(e.target.value)}
           />
 
-          <input
-            className="w-full border p-3 mb-3 rounded"
+          <input className="w-full border p-3 mb-3 rounded"
             placeholder="Building Age"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
 
-          <button
-            onClick={estimatePrice}
-            className="w-full bg-green-600 text-white p-3 rounded"
-          >
+          <button onClick={estimatePrice}
+            className="w-full bg-green-600 text-white p-3 rounded">
             Check My Flat Price
           </button>
 
           {price && (
-
             <div className="mt-6 text-center">
-
               <p className="text-xl text-green-700">{price}</p>
-
               <p className="text-orange-600 mt-3">{demand}</p>
-
               <p className="text-blue-600 mt-2">{queue}</p>
 
               <button
@@ -223,18 +205,17 @@ async function loadRazorpay() {
               >
                 List My Property
               </button>
-<button
-  onClick={handleBoost}
-  className="mt-3 bg-yellow-500 text-white px-4 py-2 rounded"
->
-  ⭐ Boost My Listing ₹99
-</button>
-            </div>
 
+              <button
+                onClick={handleBoost}
+                className="mt-3 bg-yellow-500 text-white px-4 py-2 rounded"
+              >
+                ⭐ Boost My Listing ₹99
+              </button>
+            </div>
           )}
 
           {showForm && (
-
             <div className="mt-4">
 
               <input
@@ -271,7 +252,6 @@ async function loadRazorpay() {
               </button>
 
             </div>
-
           )}
 
         </div>
