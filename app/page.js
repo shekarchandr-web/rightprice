@@ -26,7 +26,7 @@ export default function Home() {
     "Yelahanka","BTM Layout","Hebbal"
   ];
 
-  function estimatePrice() {
+  async function estimatePrice() {
 
     let sqft = parseInt(size);
     let buildingAge = parseInt(age);
@@ -52,11 +52,18 @@ export default function Home() {
 
     setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
 
-    let buyers = Math.floor(Math.random() * 20) + 5;
-    setDemand("🔥 " + buyers + " buyers searching in " + area);
+  const { data } = await supabase
+  .from("Listings")
+  .select("id")
+  .eq("area", area);
 
-    let rank = Math.floor(Math.random() * 5) + 1;
-    setQueue("⚡ You are seller #" + rank + " waiting for buyers in " + area);
+let sellers = data.length;
+
+setDemand("🔥 " + sellers + " sellers competing in " + area);
+
+setQueue(
+  "⚡ You will become seller #" + (sellers + 1) + " in this area"
+);
   }
 
   async function loadRazorpay() {
