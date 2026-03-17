@@ -16,6 +16,7 @@ export default function Home() {
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
   const [buyers, setBuyers] = useState("");
+  const [advice, setAdvice] = useState("");
  
 
   const [showForm, setShowForm] = useState(false);
@@ -55,6 +56,17 @@ let min = Math.round(adjusted * 0.92);
 let max = Math.round(adjusted * 1.08);
 
 setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
+// ⭐ smart pricing advice engine
+let suggest = Math.round((min + max) / 2);
+let fastSell = Math.round(min * 0.97);
+let overpriced = Math.round(max * 1.05);
+
+let msg =
+"⭐ Suggested Price: ₹ " + suggest.toLocaleString() +
+"\n⚡ Fast Sale Price: ₹ " + fastSell.toLocaleString() +
+"\n🚫 Above ₹ " + overpriced.toLocaleString() + " may reduce buyer interest";
+
+setAdvice(msg);
 
 // ⭐ fetch seller count
 const { data } = await supabase
@@ -247,6 +259,7 @@ setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
               <p className="text-yellow-600 font-semibold mt-2">{slots}</p>
               <p className="text-red-600 font-semibold mt-2">{heat}</p>
               <p className="text-purple-600 font-semibold mt-2">{buyers}</p>
+              <p className="text-gray-700 whitespace-pre-line mt-3">{advice}</p>
 
               <button
                 onClick={() => setShowForm(true)}
