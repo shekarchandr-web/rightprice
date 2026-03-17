@@ -15,7 +15,7 @@ export default function Home() {
   const [queue, setQueue] = useState("");
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
-  const [slot, setSlot] = useState("");
+ 
 
   const [showForm, setShowForm] = useState(false);
   const [phone, setPhone] = useState("");
@@ -94,20 +94,19 @@ setDemand("🔥 " + sellers + " sellers competing in " + area);
 
 setQueue(
   "⚡ You will become seller #" + (sellers + 1) + " in this area"
-  let slots = 20 - rank;
+  );
+  let slotsLeft = 5 - boostedCount;
 
-let slotMsg = "";
+let slotMessage = "";
 
-if (slots <= 0) {
-  slotMsg = "🚫 BOOST CLOSED — Too many premium sellers";
-} else if (slots <= 5) {
-  slotMsg = "🔥 Only " + slots + " BOOST slots left";
+if (slotsLeft > 0) {
+  slotMessage = "⭐ Only " + slotsLeft + " BOOST slots left in " + area;
 } else {
-  slotMsg = "⭐ " + slots + " premium slots available";
+  slotMessage = "🚫 BOOST Full in this area";
 }
 
-setSlots(slotMsg);
-);
+setSlots(slotMessage);
+
   }
 
   async function loadRazorpay() {
