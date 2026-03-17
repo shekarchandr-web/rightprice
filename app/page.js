@@ -13,6 +13,7 @@ export default function Home() {
   const [price, setPrice] = useState("");
   const [demand, setDemand] = useState("");
   const [queue, setQueue] = useState("");
+  const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
   const [slot, setSlot] = useState("");
 
@@ -93,6 +94,19 @@ setDemand("🔥 " + sellers + " sellers competing in " + area);
 
 setQueue(
   "⚡ You will become seller #" + (sellers + 1) + " in this area"
+  let slots = 20 - rank;
+
+let slotMsg = "";
+
+if (slots <= 0) {
+  slotMsg = "🚫 BOOST CLOSED — Too many premium sellers";
+} else if (slots <= 5) {
+  slotMsg = "🔥 Only " + slots + " BOOST slots left";
+} else {
+  slotMsg = "⭐ " + slots + " premium slots available";
+}
+
+setSlots(slotMsg);
 );
   }
 
@@ -247,6 +261,7 @@ setQueue(
               <p className="text-xl text-green-700">{price}</p>
               <p className="text-orange-600 mt-3">{demand}</p>
               <p className="text-blue-600 mt-2">{queue}</p>
+              <p className="text-yellow-600 font-semibold mt-2">{slots}</p>
               <p className="text-red-600 font-semibold mt-2">{heat}</p>
 
               <button
