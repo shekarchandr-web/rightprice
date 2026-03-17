@@ -15,6 +15,7 @@ export default function Home() {
   const [queue, setQueue] = useState("");
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
+  const [buyers, setBuyers] = useState("");
  
 
   const [showForm, setShowForm] = useState(false);
@@ -86,6 +87,10 @@ if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
 else slotMsg = "🚫 BOOST FULL in this area";
 
 setSlots(slotMsg);
+// ⭐ fake buyer pressure engine
+let buyerCount = Math.floor(Math.random() * 25) + 5;
+
+setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
 }
 
   async function loadRazorpay() {
@@ -241,6 +246,7 @@ setSlots(slotMsg);
               <p className="text-blue-600 mt-2">{queue}</p>
               <p className="text-yellow-600 font-semibold mt-2">{slots}</p>
               <p className="text-red-600 font-semibold mt-2">{heat}</p>
+              <p className="text-purple-600 font-semibold mt-2">{buyers}</p>
 
               <button
                 onClick={() => setShowForm(true)}
