@@ -14,6 +14,7 @@ export default function Home() {
   const [demand, setDemand] = useState("");
   const [queue, setQueue] = useState("");
   const [heat, setHeat] = useState("");
+  const [slot, setSlot] = useState("");
 
   const [showForm, setShowForm] = useState(false);
   const [phone, setPhone] = useState("");
@@ -69,6 +70,24 @@ if (sellers > 15) {
   heat = "❄️ LOW ACTIVITY — Early opportunity";
 }
 setHeat(heat);
+const { data: boostedData } = await supabase
+  .from("Listings")
+  .select("id")
+  .eq("area", area)
+  .eq("is_boosted", true);
+
+let boostedCount = boostedData.length;
+let slotsLeft = 5 - boostedCount;
+
+let slotMsg = "";
+
+if (slotsLeft > 0) {
+  slotMsg = "⚡ Only " + slotsLeft + " BOOST slots left in " + area;
+} else {
+  slotMsg = "🚫 BOOST Full in this area";
+}
+
+setSlot(slotMsg);
 
 setDemand("🔥 " + sellers + " sellers competing in " + area);
 
