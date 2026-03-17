@@ -13,6 +13,7 @@ export default function Home() {
   const [price, setPrice] = useState("");
   const [demand, setDemand] = useState("");
   const [queue, setQueue] = useState("");
+  const [heat, setHeat] = useState("");
 
   const [showForm, setShowForm] = useState(false);
   const [phone, setPhone] = useState("");
@@ -58,6 +59,16 @@ export default function Home() {
   .eq("area", area);
 
 let sellers = data.length;
+let heat = "";
+
+if (sellers > 15) {
+  heat = "🔥 HOT MARKET — High buyer activity";
+} else if (sellers > 7) {
+  heat = "⚡ WARM AREA — Moderate demand";
+} else {
+  heat = "❄️ LOW ACTIVITY — Early opportunity";
+}
+setHeat(heat);
 
 setDemand("🔥 " + sellers + " sellers competing in " + area);
 
@@ -217,6 +228,7 @@ setQueue(
               <p className="text-xl text-green-700">{price}</p>
               <p className="text-orange-600 mt-3">{demand}</p>
               <p className="text-blue-600 mt-2">{queue}</p>
+              <p className="text-red-600 font-semibold mt-2">{heat}</p>
 
               <button
                 onClick={() => setShowForm(true)}
