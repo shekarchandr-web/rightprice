@@ -29,85 +29,64 @@ export default function Home() {
     "Yelahanka","BTM Layout","Hebbal"
   ];
 
-  async function estimatePrice() {
+  aasync function estimatePrice() {
 
-    let sqft = parseInt(size);
-    let buildingAge = parseInt(age);
+let sqft = parseInt(size);
+let buildingAge = parseInt(age);
 
-    if (!sqft || !buildingAge || !area) {
-      alert("Fill all fields");
-      return;
-    }
+if (!sqft || !buildingAge || !area) {
+alert("Fill all fields");
+return;
+}
 
-    let baseRate = 8000;
-    let basePrice = baseRate * sqft;
+let baseRate = 8000;
+let basePrice = baseRate * sqft;
 
-    let discount =
-      buildingAge > 20 ? 0.15 :
-      buildingAge > 15 ? 0.12 :
-      buildingAge > 10 ? 0.08 :
-      buildingAge > 5 ? 0.05 : 0;
+let discount =
+buildingAge > 20 ? 0.15 :
+buildingAge > 15 ? 0.12 :
+buildingAge > 10 ? 0.08 :
+buildingAge > 5 ? 0.05 : 0;
 
-    let adjusted = basePrice * (1 - discount);
+let adjusted = basePrice * (1 - discount);
 
-    let min = Math.round(adjusted * 0.92);
-    let max = Math.round(adjusted * 1.08);
+let min = Math.round(adjusted * 0.92);
+let max = Math.round(adjusted * 1.08);
 
-    setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
+setPrice("₹ " + min.toLocaleString() + " – ₹ " + max.toLocaleString());
 
-  const { data } = await supabase
-  .from("Listings")
-  .select("id")
-  .eq("area", area);
+// ⭐ fetch seller count
+const { data } = await supabase
+.from("Listings")
+.select("id,is_boosted")
+.eq("area", area);
 
 let sellers = data.length;
-let heat = "";
 
-if (sellers > 15) {
-  heat = "🔥 HOT MARKET — High buyer activity";
-} else if (sellers > 7) {
-  heat = "⚡ WARM AREA — Moderate demand";
-} else {
-  heat = "❄️ LOW ACTIVITY — Early opportunity";
-}
-setHeat(heat);
-const { data: boostedData } = await supabase
-  .from("Listings")
-  .select("id")
-  .eq("area", area)
-  .eq("is_boosted", true);
-
-let boostedCount = boostedData.length;
-let slotsLeft = 5 - boostedCount;
-
-let slotMsg = "";
-
-if (slotsLeft > 0) {
-  slotMsg = "⚡ Only " + slotsLeft + " BOOST slots left in " + area;
-} else {
-  slotMsg = "🚫 BOOST Full in this area";
-}
-
-setSlot(slotMsg);
-
+// ⭐ demand message
 setDemand("🔥 " + sellers + " sellers competing in " + area);
 
-setQueue(
-  "⚡ You will become seller #" + (sellers + 1) + " in this area"
-  );
-  let slotsLeft = 5 - boostedCount;
+// ⭐ queue message
+setQueue("⚡ You will become seller #" + (sellers + 1) + " in this area");
 
-let slotMessage = "";
+// ⭐ market heat logic
+let heatMsg = "";
+if (sellers > 15) heatMsg = "🔥 HOT MARKET — High buyer activity";
+else if (sellers > 7) heatMsg = "⚡ WARM AREA — Moderate demand";
+else heatMsg = "❄️ LOW ACTIVITY — Early opportunity";
 
-if (slotsLeft > 0) {
-  slotMessage = "⭐ Only " + slotsLeft + " BOOST slots left in " + area;
-} else {
-  slotMessage = "🚫 BOOST Full in this area";
+setHeat(heatMsg);
+
+// ⭐ boost scarcity logic
+let boosted = data.filter(x => x.is_boosted).length;
+let slotsLeft = 5 - boosted;
+
+let slotMsg = "";
+if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
+else slotMsg = "🚫 BOOST FULL in this area";
+
+setSlots(slotMsg);
 }
-
-setSlots(slotMessage);
-
-  }
 
   async function loadRazorpay() {
     return new Promise((resolve) => {
