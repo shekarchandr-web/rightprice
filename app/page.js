@@ -29,7 +29,7 @@ export default function Home() {
     "Yelahanka","BTM Layout","Hebbal"
   ];
 
-  aasync function estimatePrice() {
+  async function estimatePrice() {
 
 let sqft = parseInt(size);
 let buildingAge = parseInt(age);
