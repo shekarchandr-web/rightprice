@@ -206,7 +206,7 @@ setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
           size: parseInt(size),
           age: parseInt(age),
           phone,
-          image_url: imageUrl
+          image_url: imageUrl,
           free_expires_at: new Date(Date.now() + 48*60*60*1000)
         }
       ]);
