@@ -25,7 +25,8 @@ const { data, error } = await supabase
   .from("Listings")
   .select("*")
   .eq("area", area)
- .order("is_boosted", { ascending: false })
+.order("is_boosted", { ascending: false })
+.order("free_expires_at", { ascending: true })
 .order("id", { ascending: false });
 
 if (error) {
@@ -126,6 +127,9 @@ setListings(data);
 {item.is_boosted && (
   <div className="flex justify-between items-center">
     <p className="text-yellow-600 font-bold">⭐ BOOSTED</p>
+    {new Date(item.free_expires_at) < new Date() && (
+  <p className="text-red-600 font-bold">⏳ FREE EXPIRED</p>
+)}
     <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
       HIGH DEMAND
     </span>
