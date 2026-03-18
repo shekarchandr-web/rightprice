@@ -8,6 +8,7 @@ export default function Buying() {
 
   const [area, setArea] = useState("");
   const [listings, setListings] = useState([]);
+  const [liveViews, setLiveViews] = useState({});
 
   const areas = [
     "Whitefield","Sarjapura","HSR Layout","Indiranagar",
@@ -42,6 +43,21 @@ data.sort((a, b) => {
 });
 
 setListings(data);
+// ⭐ LIVE VIEW ANIMATION START
+data.forEach(item => {
+  setLiveViews(prev => ({
+    ...prev,
+    [item.id]: Math.floor(Math.random() * 15) + 3
+  }));
+
+  setInterval(() => {
+    setLiveViews(prev => ({
+      ...prev,
+      [item.id]: Math.floor(Math.random() * 15) + 3
+    }));
+  }, 3000);
+});
+// ⭐ LIVE VIEW ANIMATION END
   }
   function contact(phone) {
     window.open(`https://wa.me/91${phone}`, "_blank");
@@ -153,7 +169,9 @@ setListings(data);
                 Seller Rank #{rank} in this area
               </p>
               <p className="text-orange-600 text-sm">
-🔥 {Math.floor(Math.random() * 10) + 1} buyers viewed today
+<p className="text-purple-600 text-sm">
+👀 {liveViews[item.id] || 5} people viewing now
+</p>
 </p>
 
 
