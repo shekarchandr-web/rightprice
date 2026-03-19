@@ -150,9 +150,7 @@ if (data.length > 0) {
 let buyerCount = Math.floor(Math.random() * 25) + 5;
 
 setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
-// ⭐ fake buyer pressure engine
-let buyerCount = Math.floor(Math.random() * 25) + 5;
-setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
+
 
 
 // ⭐ LIVE ACTIVITY TICKER ENGINE  ← ADD HERE
