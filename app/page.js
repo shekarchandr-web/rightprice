@@ -17,6 +17,7 @@ export default function Home() {
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
   const [ticker, setTicker] = useState("");
+  const [leaders, setLeaders] = useState([]);
   const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
@@ -106,6 +107,16 @@ if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
 else slotMsg = "🚫 BOOST FULL in this area";
 
 setSlots(slotMsg);
+// ⭐ seller leaderboard engine
+const { data: leaderData } = await supabase
+  .from("Listings")
+  .select("*")
+  .eq("area", area)
+  .order("is_boosted", { ascending: false })
+  .order("id", { ascending: false })
+  .limit(3);
+
+setLeaders(leaderData);
 // ⭐ buyer pressure engine
 let p = Math.floor(Math.random() * 100);
 setPressure(p);
@@ -327,6 +338,19 @@ setInterval(() => {
               <p className="text-green-700 font-semibold mt-2 animate-pulse">
   {ticker}
 </p>
+{leaders.length > 0 && (
+  <div className="mt-4 bg-gray-100 p-3 rounded">
+    <p className="font-semibold text-gray-700 mb-2">
+      🏆 Top Performing Listings
+    </p>
+
+    {leaders.map((l, i) => (
+      <p key={l.id} className="text-sm text-gray-600">
+        #{i + 1} {l.size} sqft {l.is_boosted ? "⭐ Boosted" : ""}
+      </p>
+    ))}
+  </div>
+)}
               <div className="mt-3">
   <p className="text-sm text-gray-600">
     Buyer activity level
