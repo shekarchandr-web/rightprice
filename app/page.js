@@ -16,6 +16,7 @@ export default function Home() {
   const [dynamicRank, setDynamicRank] = useState(0);
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
+  const [ticker, setTicker] = useState("");
   const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
@@ -149,7 +150,27 @@ if (data.length > 0) {
 let buyerCount = Math.floor(Math.random() * 25) + 5;
 
 setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
-}
+// ⭐ fake buyer pressure engine
+let buyerCount = Math.floor(Math.random() * 25) + 5;
+setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
+
+
+// ⭐ LIVE ACTIVITY TICKER ENGINE  ← ADD HERE
+const messages = [
+  "🟢 Flat sold in " + area,
+  "🔥 Buyer enquiries rising in " + area,
+  "⭐ Prices trending up in " + area,
+  "👀 New buyer viewing properties",
+  "⚡ Limited inventory left in " + area
+];
+
+setInterval(() => {
+  let msg = messages[Math.floor(Math.random() * messages.length)];
+  setTicker(msg + " just now");
+}, 5000);
+
+}   // ← THIS is estimatePrice closing
+
 
   async function loadRazorpay() {
     return new Promise((resolve) => {
@@ -305,6 +326,9 @@ setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
               <p className="text-blue-600 mt-2">{queue}</p>
               <p className="text-yellow-600 font-semibold mt-2">{slots}</p>
               <p className="text-red-600 font-semibold mt-2">{heat}</p>
+              <p className="text-green-700 font-semibold mt-2 animate-pulse">
+  {ticker}
+</p>
               <div className="mt-3">
   <p className="text-sm text-gray-600">
     Buyer activity level
