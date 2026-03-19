@@ -18,6 +18,7 @@ export default function Home() {
   const [heat, setHeat] = useState("");
   const [ticker, setTicker] = useState("");
   const [leaders, setLeaders] = useState([]);
+  const [boostPrice, setBoostPrice] = useState(99);
   const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
@@ -97,6 +98,14 @@ else if (sellers > 7) heatMsg = "⚡ WARM AREA — Moderate demand";
 else heatMsg = "❄️ LOW ACTIVITY — Early opportunity";
 
 setHeat(heatMsg);
+// ⭐ dynamic boost pricing engine
+if (sellers > 15) {
+  setBoostPrice(149);
+} else if (sellers > 7) {
+  setBoostPrice(99);
+} else {
+  setBoostPrice(49);
+}
 
 // ⭐ boost scarcity logic
 let boosted = data.filter(x => x.is_boosted).length;
@@ -382,7 +391,7 @@ setInterval(() => {
                 onClick={handleBoost}
                 className="mt-3 bg-yellow-500 text-white px-4 py-2 rounded"
               >
-                ⭐ Boost My Listing ₹99
+                ⭐ Boost My Listing ₹{boostPrice}
               </button>
             </div>
           )}
