@@ -111,11 +111,15 @@ setPressure(p);
 
 setInterval(() => {
   setPressure(prev => {
-    let next = prev + Math.floor(Math.random() * 8);
+
+    let movement = Math.floor(Math.random() * 20) - 10;
+    let next = prev + movement;
 
     if (next > 100) next = 100;
+    if (next < 15) next = 15;
 
     return next;
+
   });
 }, 4000);
 // ⭐ AUTO RANK DROP ENGINE
