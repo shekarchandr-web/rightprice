@@ -16,6 +16,7 @@ export default function Home() {
   const [dynamicRank, setDynamicRank] = useState(0);
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
+  const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
   const [advice, setAdvice] = useState("");
@@ -104,6 +105,19 @@ if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
 else slotMsg = "🚫 BOOST FULL in this area";
 
 setSlots(slotMsg);
+// ⭐ buyer pressure engine
+let p = Math.floor(Math.random() * 100);
+setPressure(p);
+
+setInterval(() => {
+  setPressure(prev => {
+    let next = prev + Math.floor(Math.random() * 8);
+
+    if (next > 100) next = 100;
+
+    return next;
+  });
+}, 4000);
 // ⭐ AUTO RANK DROP ENGINE
 setInterval(() => {
   setDynamicRank(prev => {
@@ -287,6 +301,22 @@ setBuyers("👀 " + buyerCount + " buyers searched in " + area + " today");
               <p className="text-blue-600 mt-2">{queue}</p>
               <p className="text-yellow-600 font-semibold mt-2">{slots}</p>
               <p className="text-red-600 font-semibold mt-2">{heat}</p>
+              <div className="mt-3">
+  <p className="text-sm text-gray-600">
+    Buyer activity level
+  </p>
+
+  <div className="w-full bg-gray-200 h-3 rounded">
+    <div
+      className="bg-green-500 h-3 rounded transition-all"
+      style={{ width: pressure + "%" }}
+    ></div>
+  </div>
+
+  <p className="text-xs mt-1 text-gray-500">
+    {pressure}% active buyer demand
+  </p>
+</div>
               <p className="text-purple-600 font-semibold mt-2">{expiryMsg}</p>
               <p className="text-purple-600 font-semibold mt-2">{buyers}</p>
               <p className="text-gray-700 whitespace-pre-line mt-3">{advice}</p>
