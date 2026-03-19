@@ -13,6 +13,7 @@ export default function Home() {
   const [price, setPrice] = useState("");
   const [demand, setDemand] = useState("");
   const [queue, setQueue] = useState("");
+  const [dynamicRank, setDynamicRank] = useState(0);
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
   const [expiryMsg, setExpiryMsg] = useState("");
@@ -81,7 +82,10 @@ let sellers = data.length;
 setDemand("🔥 " + sellers + " sellers competing in " + area);
 
 // ⭐ queue message
-setQueue("⚡ You will become seller #" + (sellers + 1) + " in this area");
+let startRank = sellers + 1;
+setDynamicRank(startRank);
+
+setQueue("⚡ You will become seller #" + startRank + " in this area");
 
 // ⭐ market heat logic
 let heatMsg = "";
@@ -100,6 +104,16 @@ if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
 else slotMsg = "🚫 BOOST FULL in this area";
 
 setSlots(slotMsg);
+// ⭐ AUTO RANK DROP ENGINE
+setInterval(() => {
+  setDynamicRank(prev => {
+    let newRank = prev + Math.floor(Math.random() * 2);
+
+    setQueue("⚡ You are now seller #" + newRank + " in this area");
+
+    return newRank;
+  });
+}, 6000);
 if (data.length > 0) {
   let expiry = new Date(data[0].free_expires_at);
   let now = new Date();
