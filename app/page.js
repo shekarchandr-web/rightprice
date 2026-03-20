@@ -16,14 +16,16 @@ export default function Home() {
   const [dynamicRank, setDynamicRank] = useState(0);
   const [slots, setSlots] = useState("");
   const [heat, setHeat] = useState("");
+  const [boostPrice, setBoostPrice] = useState(49);
   const [ticker, setTicker] = useState("");
   const [leaders, setLeaders] = useState([]);
-  const [boostPrice, setBoostPrice] = useState(99);
+ 
   const [boostTimer, setBoostTimer] = useState(300);
   const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
   const [advice, setAdvice] = useState("");
+  const [soldMsg, setSoldMsg] = useState("");
  
 
   const [showForm, setShowForm] = useState(false);
@@ -126,6 +128,12 @@ if (slotsLeft > 0) slotMsg = "⭐ Only " + slotsLeft + " BOOST slots left";
 else slotMsg = "🚫 BOOST FULL in this area";
 
 setSlots(slotMsg);
+// ⭐ price shock engine
+setBoostPrice(49);
+
+setTimeout(() => setBoostPrice(59), 40000);
+setTimeout(() => setBoostPrice(69), 80000);
+setTimeout(() => setBoostPrice(99), 120000);
 // ⭐ seller leaderboard engine
 const { data: leaderData } = await supabase
   .from("Listings")
@@ -196,6 +204,19 @@ setInterval(() => {
   let msg = messages[Math.floor(Math.random() * messages.length)];
   setTicker(msg + " just now");
 }, 5000);
+// ⭐ neighbour sold popup engine
+setInterval(() => {
+
+  let priceFake = Math.floor(Math.random()*40) + 60;
+
+  setSoldMsg(
+    "🟢 JUST SOLD — " +
+    (Math.floor(Math.random()*800)+900) +
+    " sqft in " + area +
+    " ₹" + priceFake + "L"
+  );
+
+}, 9000);
 
 }   // ← THIS is estimatePrice closing
 
@@ -357,6 +378,11 @@ setInterval(() => {
               <p className="text-green-700 font-semibold mt-2 animate-pulse">
   {ticker}
 </p>
+{soldMsg && (
+  <p className="text-green-600 font-bold mt-2 animate-bounce">
+    {soldMsg}
+  </p>
+)}
 {leaders.length > 0 && (
   <div className="mt-4 bg-gray-100 p-3 rounded">
     <p className="font-semibold text-gray-700 mb-2">
