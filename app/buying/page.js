@@ -8,6 +8,7 @@ export default function Buying() {
 
   const [area, setArea] = useState("");
   const [listings, setListings] = useState([]);
+  const [unlockedId, setUnlockedId] = useState(null);
   const [liveViews, setLiveViews] = useState({});
 
   const areas = [
@@ -176,7 +177,21 @@ data.forEach(item => {
 
 
   <button
-  onClick={() => alert("Contact Seller: " + item.phone)}
+  onClick={() => {
+
+    if (unlockedId === item.id) {
+      alert("Seller Phone: " + item.phone);
+      return;
+    }
+
+    let confirmUnlock = confirm("Unlock seller contact for ₹29?");
+    if (!confirmUnlock) return;
+
+    alert("✅ Payment successful (demo)");
+
+    setUnlockedId(item.id);
+
+  }}
   className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
 >
   Contact Seller
