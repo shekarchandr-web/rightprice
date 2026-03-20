@@ -19,6 +19,7 @@ export default function Home() {
   const [ticker, setTicker] = useState("");
   const [leaders, setLeaders] = useState([]);
   const [boostPrice, setBoostPrice] = useState(99);
+  const [boostTimer, setBoostTimer] = useState(300);
   const [pressure, setPressure] = useState(0);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [buyers, setBuyers] = useState("");
@@ -106,6 +107,15 @@ if (sellers > 15) {
 } else {
   setBoostPrice(49);
 }
+// ⭐ boost urgency timer engine
+setBoostTimer(300);
+
+setInterval(() => {
+  setBoostTimer(prev => {
+    if (prev <= 0) return 0;
+    return prev - 1;
+  });
+}, 1000);
 
 // ⭐ boost scarcity logic
 let boosted = data.filter(x => x.is_boosted).length;
@@ -379,6 +389,10 @@ setInterval(() => {
               <p className="text-purple-600 font-semibold mt-2">{expiryMsg}</p>
               <p className="text-purple-600 font-semibold mt-2">{buyers}</p>
               <p className="text-gray-700 whitespace-pre-line mt-3">{advice}</p>
+              <p className="text-red-600 text-sm font-semibold mt-2">
+⏰ Special price valid for {Math.floor(boostTimer/60)}:
+{String(boostTimer%60).padStart(2,'0')}
+</p>
 
               <button
                 onClick={() => setShowForm(true)}
@@ -391,6 +405,7 @@ setInterval(() => {
                 onClick={handleBoost}
                 className="mt-3 bg-yellow-500 text-white px-4 py-2 rounded"
               >
+                
                 ⭐ Boost My Listing ₹{boostPrice}
               </button>
             </div>
