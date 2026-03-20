@@ -177,7 +177,7 @@ data.forEach(item => {
 
 
   <button
-  onClick={() => {
+  onClick={async () => {
 
     if (unlockedId === item.id) {
       alert("Seller Phone: " + item.phone);
@@ -186,10 +186,16 @@ data.forEach(item => {
 
     let confirmUnlock = confirm("Unlock seller contact for ₹29?");
     if (!confirmUnlock) return;
+alert("✅ Payment successful (demo)");
 
-    alert("✅ Payment successful (demo)");
+await supabase
+  .from("Listings")
+  .update({
+    unlock_count: (item.unlock_count || 0) + 1
+  })
+  .eq("id", item.id);
 
-    setUnlockedId(item.id);
+setUnlockedId(item.id);
 
   }}
   className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
