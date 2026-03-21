@@ -201,6 +201,27 @@ data.forEach(item => {
 
      {viewMode === "list" && (
 <div className="max-w-xl mx-auto mt-6">
+  {listings.length === 0 && (
+  <div className="text-center bg-white p-6 rounded-xl shadow">
+    <p className="text-gray-600 mb-3">
+      No properties match your filters
+    </p>
+
+    <button
+      onClick={() => {
+        setMinBudget(0);
+        setMaxBudget(100000000);
+        setMinSize(0);
+        setMaxSize(5000);
+        setAgeFilter("any");
+        search();
+      }}
+      className="bg-green-600 text-white px-4 py-2 rounded"
+    >
+      Reset Filters
+    </button>
+  </div>
+)}
 
         {listings.map((item, i) => {
 
