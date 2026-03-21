@@ -12,6 +12,7 @@ export default function Buying() {
   const [liveViews, setLiveViews] = useState({});
   const [viewMode, setViewMode] = useState("list");
   const [savedSearch, setSavedSearch] = useState(false);
+  const [searched, setSearched] = useState(false);
   const [minBudget, setMinBudget] = useState(0);
 const [maxBudget, setMaxBudget] = useState(100000000);
 const [minSize, setMinSize] = useState(0);
@@ -65,6 +66,7 @@ return true;
 });
 
 setListings(filtered);
+setSearched(true);
 // ⭐ LIVE VIEW ANIMATION START
 data.forEach(item => {
   setLiveViews(prev => ({
@@ -219,7 +221,7 @@ data.forEach(item => {
 
      {viewMode === "list" && (
 <div className="max-w-xl mx-auto mt-6">
-  {listings.length === 0 && (
+ {searched && listings.length === 0 &&  (
   <div className="text-center bg-white p-6 rounded-xl shadow">
     <p className="text-gray-600 mb-3">
       No properties match your filters
