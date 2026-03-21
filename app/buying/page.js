@@ -169,6 +169,9 @@ data.forEach(item => {
               <p className="text-blue-600 text-sm mt-1">
                 Seller Rank #{rank} in this area
               </p>
+              <p className="text-red-600 text-sm font-semibold">
+🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
+</p>
               <p className="text-orange-600 text-sm">
 <p className="text-purple-600 text-sm">
 👀 {liveViews[item.id] || 5} people viewing now
