@@ -11,6 +11,7 @@ export default function Buying() {
   const [unlockedId, setUnlockedId] = useState(null);
   const [liveViews, setLiveViews] = useState({});
   const [viewMode, setViewMode] = useState("list");
+  const [savedSearch, setSavedSearch] = useState(false);
   const [minBudget, setMinBudget] = useState(0);
 const [maxBudget, setMaxBudget] = useState(100000000);
 const [minSize, setMinSize] = useState(0);
@@ -160,6 +161,18 @@ data.forEach(item => {
           >
             Search Properties
           </button>
+          <button
+  onClick={() => {
+    localStorage.setItem(
+      "savedSearch",
+      JSON.stringify({ area })
+    );
+    setSavedSearch(true);
+  }}
+  className="w-full mt-2 bg-blue-600 text-white p-2 rounded"
+>
+  🔔 Save this search
+</button>
           <div className="mt-4">
 
 <p className="text-sm font-semibold">Budget Range</p>
@@ -192,6 +205,11 @@ data.forEach(item => {
   <option value="mid">5-15 years</option>
   <option value="old">15+ years</option>
 </select>
+{savedSearch && (
+  <p className="text-green-600 text-sm text-center mt-2">
+    ✅ Search saved — we will alert you on new listings
+  </p>
+)}
 
 </div>
 
