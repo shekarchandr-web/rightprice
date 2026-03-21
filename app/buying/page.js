@@ -11,6 +11,11 @@ export default function Buying() {
   const [unlockedId, setUnlockedId] = useState(null);
   const [liveViews, setLiveViews] = useState({});
   const [viewMode, setViewMode] = useState("list");
+  const [minBudget, setMinBudget] = useState(0);
+const [maxBudget, setMaxBudget] = useState(100000000);
+const [minSize, setMinSize] = useState(0);
+const [maxSize, setMaxSize] = useState(5000);
+const [ageFilter, setAgeFilter] = useState("any");
 
   const areas = [
     "Whitefield","Sarjapura","HSR Layout","Indiranagar",
@@ -44,7 +49,21 @@ data.sort((a, b) => {
   return 0;
 });
 
-setListings(data);
+let filtered = data.filter(item => {
+
+let price = item.size * 8000;
+
+if (price > maxBudget) return false;
+if (item.size > maxSize) return false;
+
+if (ageFilter === "new" && item.age > 5) return false;
+if (ageFilter === "mid" && (item.age < 5 || item.age > 15)) return false;
+if (ageFilter === "old" && item.age < 15) return false;
+
+return true;
+});
+
+setListings(filtered);
 // ⭐ LIVE VIEW ANIMATION START
 data.forEach(item => {
   setLiveViews(prev => ({
@@ -141,6 +160,40 @@ data.forEach(item => {
           >
             Search Properties
           </button>
+          <div className="mt-4">
+
+<p className="text-sm font-semibold">Budget Range</p>
+<input
+  type="range"
+  min="0"
+  max="20000000"
+  step="100000"
+  onChange={(e)=>setMaxBudget(e.target.value)}
+  className="w-full"
+/>
+
+<p className="text-sm font-semibold mt-3">Flat Size (sqft)</p>
+<input
+  type="range"
+  min="500"
+  max="4000"
+  step="100"
+  onChange={(e)=>setMaxSize(e.target.value)}
+  className="w-full"
+/>
+
+<p className="text-sm font-semibold mt-3">Property Age</p>
+<select
+  className="w-full border p-2 rounded"
+  onChange={(e)=>setAgeFilter(e.target.value)}
+>
+  <option value="any">Any</option>
+  <option value="new">0-5 years</option>
+  <option value="mid">5-15 years</option>
+  <option value="old">15+ years</option>
+</select>
+
+</div>
 
         </div>
 
