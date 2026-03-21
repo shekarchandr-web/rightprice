@@ -147,9 +147,33 @@ data.forEach(item => {
 {!item.is_boosted && new Date(item.free_expires_at) < new Date() && (
   <p className="text-red-600 font-bold">⏳ FREE EXPIRED</p>
 )}
-    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
-      HIGH DEMAND
+    {(() => {
+
+  let demandScore = Math.floor(Math.random()*100);
+
+  if (demandScore > 70) {
+    return (
+      <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+        HIGH DEMAND
+      </span>
+    );
+  }
+
+  if (demandScore > 40) {
+    return (
+      <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded">
+        MEDIUM DEMAND
+      </span>
+    );
+  }
+
+  return (
+    <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">
+      LOW DEMAND
     </span>
+  );
+
+})()}
   </div>
 )}
               <h3 className="font-semibold mt-2">
