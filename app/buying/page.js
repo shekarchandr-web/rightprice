@@ -197,6 +197,22 @@ data.forEach(item => {
               <p className="text-blue-600 text-sm mt-1">
                 Seller Rank #{rank} in this area
               </p>
+              <div className="mt-2">
+  <p className="text-xs text-gray-500">Price Trend</p>
+
+  <div className="w-full bg-gray-200 h-2 rounded mt-1">
+    <div
+      className="bg-blue-500 h-2 rounded transition-all"
+      style={{
+        width: (Math.floor(Math.random()*60)+30) + "%"
+      }}
+    ></div>
+  </div>
+
+  <p className="text-xs text-gray-400 mt-1">
+    📈 Prices rising in this locality
+  </p>
+</div>
               <p className="text-red-600 text-sm font-semibold">
 🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
 </p>
