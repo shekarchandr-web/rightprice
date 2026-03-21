@@ -10,6 +10,7 @@ export default function Buying() {
   const [listings, setListings] = useState([]);
   const [unlockedId, setUnlockedId] = useState(null);
   const [liveViews, setLiveViews] = useState({});
+  const [viewMode, setViewMode] = useState("list");
 
   const areas = [
     "Whitefield","Sarjapura","HSR Layout","Indiranagar",
@@ -83,6 +84,23 @@ data.forEach(item => {
           <h2 className="text-xl font-semibold mb-4 text-center">
             Find Properties
           </h2>
+          <div className="flex justify-center mb-3 gap-3">
+
+  <button
+    onClick={() => setViewMode("list")}
+    className={`px-3 py-1 rounded ${viewMode==="list" ? "bg-green-600 text-white" : "bg-gray-200"}`}
+  >
+    List View
+  </button>
+
+  <button
+    onClick={() => setViewMode("map")}
+    className={`px-3 py-1 rounded ${viewMode==="map" ? "bg-green-600 text-white" : "bg-gray-200"}`}
+  >
+    Map View
+  </button>
+
+</div>
 
           <select
             className="w-full border p-3 mb-3 rounded"
@@ -104,7 +122,8 @@ data.forEach(item => {
 
       </div>
 
-      <div className="max-w-xl mx-auto mt-6">
+     {viewMode === "list" && (
+<div className="max-w-xl mx-auto mt-6">
 
         {listings.map((item, i) => {
 
@@ -158,6 +177,7 @@ data.forEach(item => {
   <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
     1 / 5
   </div>
+  
 
 </div>
 {item.is_boosted && (
