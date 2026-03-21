@@ -161,6 +161,34 @@ data.forEach(item => {
               <p className="text-green-700 font-semibold mt-1">
                 ₹ {min.toLocaleString()} – ₹ {max.toLocaleString()}
               </p>
+              {
+  (() => {
+    let avg = (min + max) / 2;
+    let randomPrice = avg * (Math.random()*0.2 + 0.9);
+
+    if (randomPrice < avg * 0.95) {
+      return (
+        <p className="text-green-600 text-sm font-semibold">
+          🟢 GOOD DEAL
+        </p>
+      );
+    }
+
+    if (randomPrice > avg * 1.05) {
+      return (
+        <p className="text-red-600 text-sm font-semibold">
+          🔴 OVERPRICED
+        </p>
+      );
+    }
+
+    return (
+      <p className="text-yellow-600 text-sm font-semibold">
+        🟡 FAIR PRICE
+      </p>
+    );
+  })()
+}
 
               <p className="text-sm text-gray-500">
                 Age: {item.age} years
