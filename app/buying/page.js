@@ -64,7 +64,13 @@ if (ageFilter === "old" && item.age < 15) return false;
 
 return true;
 });
+let lastCount = localStorage.getItem("lastCount_" + area);
 
+if (lastCount && filtered.length > lastCount) {
+  alert("🆕 " + (filtered.length - lastCount) + " new properties added in " + area);
+}
+
+localStorage.setItem("lastCount_" + area, filtered.length);
 setListings(filtered);
 setSearched(true);
 // ⭐ LIVE VIEW ANIMATION START
@@ -266,7 +272,7 @@ data.forEach(item => {
 
            <div
   key={item.id}
-  className={`p-4 mb-4 rounded-xl shadow transition 
+  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-105 hover:shadow-2xl duration-300
   ${item.is_boosted 
     ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
     : "bg-white"}`}
@@ -454,7 +460,9 @@ setUnlockedId(item.id);
     {listings.map((item,i)=>(
       <div
         key={item.id}
-        className={`absolute p-2 rounded shadow text-xs
+       className={`absolute p-2 rounded shadow text-xs transition
+${item.is_boosted ? "bg-yellow-300 scale-110 animate-pulse" : "bg-white"}
+}
         ${item.is_boosted ? "bg-yellow-300 scale-110" : "bg-white"}`}
         style={{
           top: (i*60)%420,
