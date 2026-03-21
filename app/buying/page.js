@@ -326,7 +326,33 @@ setUnlockedId(item.id);
         })}
 
       </div>
+     )}
+     {viewMode === "map" && (
 
+<div className="mt-6 px-6">
+
+  <div className="bg-green-100 h-[500px] rounded-xl relative overflow-hidden">
+
+    {listings.map((item,i)=>(
+      <div
+        key={item.id}
+        className={`absolute p-2 rounded shadow text-xs
+        ${item.is_boosted ? "bg-yellow-300 scale-110" : "bg-white"}`}
+        style={{
+          top: (i*60)%420,
+          left: (i*90)%300
+        }}
+      >
+        ₹{Math.floor(item.size*8000/100000)}L
+      </div>
+    ))}
+
+  </div>
+
+</div>
+
+)}
     </div>
+      
   );
 }
