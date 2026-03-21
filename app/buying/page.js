@@ -13,6 +13,7 @@ export default function Buying() {
   const [viewMode, setViewMode] = useState("list");
   const [savedSearch, setSavedSearch] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [lastCount, setLastCount] = useState(0);
   const [minBudget, setMinBudget] = useState(0);
 const [maxBudget, setMaxBudget] = useState(100000000);
 const [minSize, setMinSize] = useState(0);
@@ -71,8 +72,11 @@ if (lastCount && filtered.length > lastCount) {
 }
 
 localStorage.setItem("lastCount_" + area, filtered.length);
+
+
 setListings(filtered);
 setSearched(true);
+
 // ⭐ LIVE VIEW ANIMATION START
 data.forEach(item => {
   setLiveViews(prev => ({
@@ -272,7 +276,7 @@ data.forEach(item => {
 
            <div
   key={item.id}
-  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-105 hover:shadow-2xl duration-300
+  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-300 hover:shadow-2xl duration-300
   ${item.is_boosted 
     ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
     : "bg-white"}`}
