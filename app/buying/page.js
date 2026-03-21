@@ -69,13 +69,37 @@ data.forEach(item => {
 
     <div className="min-h-screen bg-gray-50">
 
-      <div className="bg-white shadow p-4 flex justify-between px-10">
-        <h1 className="font-bold text-xl text-green-700">RightPrice</h1>
-        <div className="space-x-6">
-          <Link href="/" className="font-semibold text-gray-600">Sell</Link>
-          <Link href="/buying" className="font-semibold text-green-700">Buy</Link>
-        </div>
-      </div>
+      <div className="sticky top-0 z-50 bg-gradient-to-r from-green-700 to-green-500 shadow-lg">
+
+  <div className="flex justify-between items-center px-8 py-4 text-white">
+
+    <h1 className="font-bold text-2xl tracking-wide">
+      RightPrice
+    </h1>
+
+    <div className="space-x-6 text-sm font-semibold">
+
+      <Link href="/" className="hover:underline">
+        Sell
+      </Link>
+
+      <Link href="/buying" className="hover:underline">
+        Buy
+      </Link>
+
+      <span className="opacity-80 cursor-pointer">
+        Map
+      </span>
+
+      <span className="opacity-80 cursor-pointer">
+        Alerts
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
       <div className="flex justify-center mt-10">
 
