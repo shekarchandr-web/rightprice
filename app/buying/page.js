@@ -276,7 +276,7 @@ data.forEach(item => {
 
            <div
   key={item.id}
-  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-300 hover:shadow-2xl duration-300
+  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-105 hover:shadow-2xl duration-300
   ${item.is_boosted 
     ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
     : "bg-white"}`}
