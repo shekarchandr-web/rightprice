@@ -134,13 +134,32 @@ data.forEach(item => {
     ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
     : "bg-white"}`}
 >
+<div className="relative">
 
-              {item.image_url && (
-                <img
-                  src={item.image_url}
-                  className="h-44 w-full object-cover rounded"
-                />
-              )}
+  <img
+    src={item.image_url}
+    className="h-44 w-full object-cover rounded transition"
+  />
+
+  <button
+    onClick={() => alert("Next image demo")}
+    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white px-2 rounded shadow"
+  >
+    ◀
+  </button>
+
+  <button
+    onClick={() => alert("Next image demo")}
+    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white px-2 rounded shadow"
+  >
+    ▶
+  </button>
+
+  <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+    1 / 5
+  </div>
+
+</div>
 {item.is_boosted && (
   <div className="flex justify-between items-center">
     <p className="text-yellow-600 font-bold">⭐ BOOSTED</p>
