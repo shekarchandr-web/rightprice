@@ -277,10 +277,15 @@ data.forEach(item => {
            <div
   key={item.id}
   className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-110 hover:shadow-2xl duration-300
-  ${item.is_boosted 
-    ? "bg-yellow-50 border-2 border-yellow-400 scale-105" 
-    : "bg-white"}`}
+      ${Date.now() - new Date(item.created_at || Date.now()) < 86400000
+    ? "ring-2 ring-green-400 animate-pulse"
+    : ""}
+  ${item.is_boosted
+    ? "bg-yellow-50 border-2 border-yellow-400 scale-110"
+    : "bg-white hover:scale-[1.03] hover:shadow-xl"}`}
 >
+  
+
 <div className="relative">
 
   <img
@@ -376,6 +381,11 @@ data.forEach(item => {
     return (
       <p className="text-yellow-600 text-sm font-semibold">
         🟡 FAIR PRICE
+        {Math.random() > 0.6 && (
+  <p className="text-xs text-red-500 font-semibold mt-1 animate-pulse">
+    🔻 Price dropped recently
+  </p>
+)}
       </p>
     );
   })()
@@ -416,6 +426,17 @@ data.forEach(item => {
               <p className="text-orange-600 text-sm">
 <p className="text-purple-600 text-sm">
 👀 {liveViews[item.id] || 5} people viewing now
+<div className="mt-2">
+  <div className="w-full bg-gray-200 h-2 rounded">
+    <div
+      className="bg-red-500 h-2 rounded animate-pulse"
+      style={{ width: (Math.floor(Math.random()*60)+30) + "%" }}
+    ></div>
+  </div>
+  <p className="text-xs text-gray-500">
+    Buyer competition level
+  </p>
+</div>
 </p>
 </p>
 
