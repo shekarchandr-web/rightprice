@@ -276,7 +276,7 @@ data.forEach(item => {
 
            <div
   key={item.id}
-  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-110 hover:shadow-2xl duration-300
+  className={`p-4 mb-4 rounded-xl shadow transition transform hover:scale-105 hover:shadow-2xl duration-300
       ${Date.now() - new Date(item.created_at || Date.now()) < 86400000
     ? "ring-2 ring-green-400 animate-pulse"
     : ""}
