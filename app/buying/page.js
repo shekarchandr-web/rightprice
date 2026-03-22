@@ -402,10 +402,16 @@ data.forEach(item => {
 
   <p className="text-xs text-gray-400 mt-1">
     📈 Prices rising in this locality
+    <p className="text-xs text-indigo-600 mt-1">
+💬 Seller open to negotiation
+</p>
   </p>
 </div>
               <p className="text-red-600 text-sm font-semibold">
 🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
+<p className="text-xs text-pink-600 mt-1">
+❤️ {Math.floor(Math.random()*8)+2} buyers shortlisted this
+</p>
 </p>
               <p className="text-orange-600 text-sm">
 <p className="text-purple-600 text-sm">
@@ -482,6 +488,16 @@ ${item.is_boosted ? "bg-yellow-300 scale-110 animate-pulse" : "bg-white"}
 </div>
 
 )}
+{/* ⭐ FLOATING BOOST BANNER */}
+<div className="fixed bottom-6 right-6 bg-yellow-400 text-black px-6 py-3 rounded-xl shadow-2xl animate-bounce z-50">
+  ⭐ Premium listings selling faster  
+  <button
+    onClick={()=>alert("Boost plan demo")}
+    className="ml-3 bg-black text-white px-3 py-1 rounded"
+  >
+    Boost Now
+  </button>
+</div>
     </div>
       
   );
