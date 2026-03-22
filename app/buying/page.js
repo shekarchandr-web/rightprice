@@ -348,7 +348,13 @@
   })()}
     </div>
   )}
-                <h3 className="font-semibold mt-2">
+                
+                {Math.random() > 0.5 && (
+  <p className="text-green-600 text-xs font-semibold">
+    ✔ Verified Seller
+  </p>
+)}
+<h3 className="font-semibold mt-2">
                   {item.size} sqft Apartment
                 </h3>
 
@@ -398,6 +404,9 @@
                 <p className="text-blue-600 text-sm mt-1">
                   Seller Rank #{rank} in this area
                 </p>
+                <p className="text-gray-500 text-xs">
+  ⚡ Responds within {Math.floor(Math.random()*10)+2} mins
+</p>
                 <div className="mt-2">
     <p className="text-xs text-gray-500">Price Trend</p>
 
@@ -419,6 +428,9 @@
   </div>
                 <p className="text-red-600 text-sm font-semibold">
   🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
+  <p className="text-pink-600 text-xs">
+  ❤️ {Math.floor(Math.random()*5)+1} buyers contacted today
+</p>
   <p className="text-xs text-pink-600 mt-1">
   ❤️ {Math.floor(Math.random()*8)+2} buyers shortlisted this
   </p>
