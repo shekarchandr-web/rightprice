@@ -281,7 +281,7 @@ data.forEach(item => {
     ? "ring-2 ring-green-400 animate-pulse"
     : ""}
   ${item.is_boosted
-    ? "bg-yellow-50 border-2 border-yellow-400 scale-110"
+    ? "bg-yellow-50 border-2 border-yellow-400 scale-105"
     : "bg-white hover:scale-[1.03] hover:shadow-xl"}`}
 >
   
