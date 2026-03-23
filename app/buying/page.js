@@ -287,6 +287,9 @@
     
 
   <div className="relative">
+    <div className="absolute top-2 left-2 bg-white px-2 py-1 text-xs rounded shadow">
+✔ Verified Seller
+</div>
 
     <img
       src={item.image_url}
@@ -355,6 +358,11 @@
   </p>
 )}
 <h3 className="font-semibold mt-2">
+  {Math.random() > 0.8 && (
+  <p className="text-purple-600 text-xs font-bold">
+    🏆 Best deal in {item.area}
+  </p>
+)}
   {Math.random() > 0.6 && (
   <p className="text-green-600 text-xs font-bold">
     🚀 Likely to sell in 3 days
@@ -364,6 +372,9 @@
                 </h3>
 
                 <p className="text-gray-600">{item.area}</p>
+                <p className="text-xs text-gray-500">
+📊 Priced lower than 60% nearby listings
+</p>
 
                 <p className="text-green-700 font-semibold mt-1">
                   <p className="text-xs text-gray-600">
@@ -412,6 +423,9 @@
 
                 <p className="text-sm text-gray-500">
                   Age: {item.age} years
+                  <p className="text-blue-500 text-xs">
+🎯 Buyer Match Score {Math.floor(Math.random()*40)+60}%
+</p>
                 </p>
 
                 <p className="text-blue-600 text-sm mt-1">
@@ -434,6 +448,11 @@
 
     <p className="text-xs text-gray-400 mt-1">
       📈 Prices rising in this locality
+      {Math.random() > 0.5 && (
+  <p className="text-indigo-500 text-xs">
+💬 Seller open to negotiation
+  </p>
+)}
       <p className="text-xs text-indigo-600 mt-1">
   💬 Seller open to negotiation
   </p>
@@ -441,6 +460,11 @@
   </div>
                 <p className="text-red-600 text-sm font-semibold">
   🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
+  {Math.random() > 0.6 && (
+  <p className="text-red-500 text-xs">
+    ⏳ Offer likely to close today
+  </p>
+)}
   <p className="text-pink-600 text-xs">
   ❤️ {Math.floor(Math.random()*5)+1} buyers contacted today
 </p>
@@ -451,6 +475,9 @@
                 <p className="text-orange-600 text-sm">
   <p className="text-purple-600 text-sm">
   👀 {liveViews[item.id] || 5} people viewing now
+  <p className="text-pink-500 text-xs">
+❤️ {Math.floor(Math.random()*5)+1} buyers shortlisted this
+</p>
   <div className="mt-2">
     <div className="w-full bg-gray-200 h-2 rounded">
       <div
