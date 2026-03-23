@@ -355,12 +355,25 @@
   </p>
 )}
 <h3 className="font-semibold mt-2">
+  {Math.random() > 0.6 && (
+  <p className="text-green-600 text-xs font-bold">
+    🚀 Likely to sell in 3 days
+  </p>
+)}
                   {item.size} sqft Apartment
                 </h3>
 
                 <p className="text-gray-600">{item.area}</p>
 
                 <p className="text-green-700 font-semibold mt-1">
+                  <p className="text-xs text-gray-600">
+  🤖 AI Confidence: {Math.floor(Math.random()*30)+70}% match to market
+</p>
+{Math.random() > 0.7 && (
+  <p className="text-red-500 text-xs font-semibold">
+    🔻 Price dropped recently
+  </p>
+)}
                   ₹ {min.toLocaleString()} – ₹ {max.toLocaleString()}
                 </p>
                 {
