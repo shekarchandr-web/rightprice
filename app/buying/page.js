@@ -235,7 +235,12 @@
       {viewMode === "list" && (
         
         
-  <div className="max-w-xl mx-auto mt-6">
+ <>
+<div className="text-center text-xs text-gray-500 animate-pulse mt-3">
+🔥 A similar flat sold 2 mins ago nearby
+</div>
+
+<div className="max-w-xl mx-auto mt-6">
   {searched && listings.length === 0 &&  (
     <div className="text-center bg-white p-6 rounded-xl shadow">
       <p className="text-gray-600 mb-3">
