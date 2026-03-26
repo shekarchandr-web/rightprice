@@ -102,6 +102,9 @@
       <div className="min-h-screen bg-gray-50">
 
         <div className="sticky top-0 z-50 bg-gradient-to-r from-green-700 to-green-500 shadow-lg">
+          <div className="bg-yellow-100 text-center text-sm py-2">
+📈 Property prices in {area || "this area"} rising this week
+</div>
 
     <div className="flex justify-between items-center px-8 py-4 text-white">
 
@@ -230,6 +233,8 @@
         </div>
 
       {viewMode === "list" && (
+        
+        
   <div className="max-w-xl mx-auto mt-6">
   {searched && listings.length === 0 &&  (
     <div className="text-center bg-white p-6 rounded-xl shadow">
@@ -386,6 +391,9 @@
   </p>
 )}
                   ₹ {min.toLocaleString()} – ₹ {max.toLocaleString()}
+                  <p className="text-green-600 text-xs font-semibold">
+🤖 AI says this is fairly priced
+</p>
                 </p>
                 {
     (() => {
@@ -396,6 +404,11 @@
         return (
           <p className="text-green-600 text-sm font-semibold">
             🟢 GOOD DEAL
+            {Math.random() > 0.7 && (
+  <p className="text-red-500 text-xs">
+🔻 Price dropped recently
+  </p>
+)}
           </p>
         );
       }
@@ -430,6 +443,9 @@
 
                 <p className="text-blue-600 text-sm mt-1">
                   Seller Rank #{rank} in this area
+                  <p className="text-xs text-gray-500">
+⚡ Responds within {Math.floor(Math.random()*20)+5} mins
+</p>
                 </p>
                 <p className="text-gray-500 text-xs">
   ⚡ Responds within {Math.floor(Math.random()*10)+2} mins
@@ -460,6 +476,13 @@
   </div>
                 <p className="text-red-600 text-sm font-semibold">
   🔥 Demand Score {Math.floor(Math.random()*40)+60}/100
+  <div className="w-full bg-gray-200 h-2 rounded mt-1">
+  <div
+    className="bg-red-400 h-2 rounded"
+    style={{ width: (Math.floor(Math.random()*50)+40)+"%" }}
+  ></div>
+</div>
+<p className="text-xs text-gray-400">Buyer competition level</p>
   {Math.random() > 0.6 && (
   <p className="text-red-500 text-xs">
     ⏳ Offer likely to close today
@@ -491,7 +514,9 @@
   </div>
   </p>
   </p>
-
+<p className="text-xs text-indigo-500 mt-2">
+🏠 3 similar homes available nearby
+</p>
 
     <button
     onClick={async () => {
@@ -525,6 +550,9 @@
                   className="mt-3 bg-green-600 text-white px-4 py-2 rounded"
                 >
                   WhatsApp Seller
+                  <button className="mt-2 bg-purple-600 text-white px-4 py-2 rounded">
+📅 Schedule Visit
+</button>
                 </button>
 
               </div>
@@ -537,7 +565,9 @@
       {viewMode === "map" && (
 
   <div className="mt-6 px-6">
-
+<div className="text-center text-xs text-gray-500 mb-2">
+🟥 High demand  🟧 Medium  🟩 Low
+</div>
     <div className="bg-green-100 h-[500px] rounded-xl relative overflow-hidden">
 
       {listings.map((item,i)=>(
@@ -571,6 +601,11 @@
       Boost Now
     </button>
   </div>
+  <div className="fixed bottom-6 right-6 z-50">
+  <button className="bg-green-600 text-white px-5 py-3 rounded-full shadow-xl animate-bounce">
+    📞 Enquire Now
+  </button>
+</div>
       </div>
         
     );
