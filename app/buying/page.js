@@ -233,9 +233,8 @@
         </div>
 
       {viewMode === "list" && (
-        
-        
- <>
+    
+        <>
 <div className="text-center text-xs text-gray-500 animate-pulse mt-3">
 🔥 A similar flat sold 2 mins ago nearby
 </div>
@@ -261,6 +260,7 @@
         Reset Filters
       </button>
     </div>
+    
   )}
 
           {listings.map((item, i) => {
@@ -566,6 +566,7 @@
           })}
 
         </div>
+        </>
       )}
       {viewMode === "map" && (
 
@@ -577,7 +578,7 @@
 
       {listings.map((item,i)=>(
         <div
-          key={item.id}
+          key={item.id} 
         className={`absolute p-2 rounded shadow text-xs transition
   ${item.is_boosted ? "bg-yellow-300 scale-110 animate-pulse" : "bg-white"}`}
   
