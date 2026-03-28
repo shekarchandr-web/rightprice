@@ -585,8 +585,7 @@ localStorage.setItem("recentHomes", JSON.stringify(recent.slice(0,5)));
   let recent = JSON.parse(localStorage.getItem("recentHomes") || "[]");
 recent.unshift(item.id);
 localStorage.setItem("recentHomes", JSON.stringify(recent.slice(0,5)));
-
-    }}
+ }}
     className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
   >
     Contact Seller
