@@ -460,8 +460,8 @@
   )}
         </p>
       );
-      <p className="text-xs text-gray-400">
-🔁 Viewed {Math.floor(Math.random()*20)+5} times today
+<p className="text-xs text-indigo-500">
+💡 Tip: Properties in this area sell in 5–7 days
 </p>
     })()
   }
