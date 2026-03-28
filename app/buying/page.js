@@ -367,10 +367,14 @@
     ✔ Verified Seller
   </p>
 )}
+<div className="flex justify-between items-center">
 <h3 className="font-semibold mt-2">
   {Math.random() > 0.8 && (
   <p className="text-purple-600 text-xs font-bold">
     🏆 Best deal in {item.area}
+    <p className="text-xs text-orange-500">
+🔥 High demand locality
+</p>
   </p>
 )}
   {Math.random() > 0.6 && (
@@ -380,8 +384,25 @@
 )}
                   {item.size} sqft Apartment
                 </h3>
+                <button
+  onClick={() => {
+    let saved = JSON.parse(localStorage.getItem("savedHomes") || "[]");
+    if (!saved.includes(item.id)) {
+      saved.push(item.id);
+      localStorage.setItem("savedHomes", JSON.stringify(saved));
+      alert("❤️ Saved");
+    }
+  }}
+  className="text-red-500 text-sm"
+>
+  ❤️ Save
+</button>
+</div>
 
                 <p className="text-gray-600">{item.area}</p>
+                <p className="text-xs text-gray-500">
+📍 Near Metro • School • IT Park
+</p>
                 <p className="text-xs text-gray-500">
 📊 Priced lower than 60% nearby listings
 </p>
@@ -396,6 +417,9 @@
   </p>
 )}
                   ₹ {min.toLocaleString()} – ₹ {max.toLocaleString()}
+                  let recent = JSON.parse(localStorage.getItem("recentHomes") || "[]");
+recent.unshift(item.id);
+localStorage.setItem("recentHomes", JSON.stringify(recent.slice(0,5)));
                   <p className="text-green-600 text-xs font-semibold">
 🤖 AI says this is fairly priced
 </p>
@@ -436,11 +460,17 @@
   )}
         </p>
       );
+      <p className="text-xs text-gray-400">
+🔁 Viewed {Math.floor(Math.random()*20)+5} times today
+</p>
     })()
   }
 
                 <p className="text-sm text-gray-500">
                   Age: {item.age} years
+                  <p className="text-xs text-gray-400">
+⏱ Listed {Math.floor(Math.random()*10)+1} days ago
+</p>
                   <p className="text-blue-500 text-xs">
 🎯 Buyer Match Score {Math.floor(Math.random()*40)+60}%
 </p>
@@ -448,6 +478,9 @@
 
                 <p className="text-blue-600 text-sm mt-1">
                   Seller Rank #{rank} in this area
+                  <p className="text-xs text-green-600">
+⭐ Trust Score {Math.floor(Math.random()*30)+70}/100
+</p>
                   <p className="text-xs text-gray-500">
 ⚡ Responds within {Math.floor(Math.random()*20)+5} mins
 </p>
@@ -503,6 +536,9 @@
                 <p className="text-orange-600 text-sm">
   <p className="text-purple-600 text-sm">
   👀 {liveViews[item.id] || 5} people viewing now
+  <p className="text-xs text-gray-400">
+🔁 Viewed {Math.floor(Math.random()*20)+5} times today
+</p>
   <p className="text-pink-500 text-xs">
 ❤️ {Math.floor(Math.random()*5)+1} buyers shortlisted this
 </p>
@@ -513,6 +549,9 @@
         style={{ width: (Math.floor(Math.random()*60)+30) + "%" }}
       ></div>
     </div>
+    <div className="text-center bg-black text-white text-xs py-1">
+🚀 12 buyers searched {area || "this area"} in last hour
+</div>
     <p className="text-xs text-gray-500">
       Buyer competition level
     </p>
@@ -543,6 +582,9 @@
     .eq("id", item.id);
 
   setUnlockedId(item.id);
+  let recent = JSON.parse(localStorage.getItem("recentHomes") || "[]");
+recent.unshift(item.id);
+localStorage.setItem("recentHomes", JSON.stringify(recent.slice(0,5)));
 
     }}
     className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
@@ -595,6 +637,7 @@
     </div>
 
   </div>
+  
 
   )}
   {/* ⭐ FLOATING BOOST BANNER */}
@@ -613,6 +656,7 @@
   </button>
 </div>
       </div>
+      
         
     );
   }
