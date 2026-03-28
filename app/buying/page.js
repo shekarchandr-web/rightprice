@@ -417,9 +417,9 @@
   </p>
 )}
                   ₹ {min.toLocaleString()} – ₹ {max.toLocaleString()}
-                  let recent = JSON.parse(localStorage.getItem("recentHomes") || "[]");
-recent.unshift(item.id);
-localStorage.setItem("recentHomes", JSON.stringify(recent.slice(0,5)));
+               <p className="text-xs text-gray-500">
+💰 EMI starts ~ ₹{Math.floor(min/2000)} / month
+</p>
                   <p className="text-green-600 text-xs font-semibold">
 🤖 AI says this is fairly priced
 </p>
